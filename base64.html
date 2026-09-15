@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base64 Noise Mixer</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #f4f4f1;
+      --panel: #ffffff;
+      --text: #141414;
+      --muted: #6a6a66;
+      --border: #d9d9d4;
+      --soft: #f8f8f6;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 48px auto;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 5vw, 42px);
+      letter-spacing: -0.05em;
+      line-height: 1;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 0;
+      background: #fff;
+      color: var(--text);
+      padding: 12px 13px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #111;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      padding: 11px 18px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      background: #fff;
+      color: #111;
+    }
+
+    button:hover {
+      opacity: .82;
+    }
+
+    .output {
+      min-height: 128px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: var(--soft);
+      font: 13px/1.7 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+      user-select: all;
+    }
+
+    .meta {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .reveal {
+      margin-top: 16px;
+      padding: 16px;
+      border-left: 3px solid #111;
+      background: var(--soft);
+    }
+
+    .reveal code {
+      display: block;
+      margin-top: 10px;
+      font: 13px/1.7 "SFMono-Regular", Consolas, monospace;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .status {
+      min-height: 20px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .tiny {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .rule {
+      font: 13px/1.7 "SFMono-Regular", Consolas, monospace;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 720px) {
+      main {
+        margin: 24px auto;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Base64 Noise Mixer</h1>
+      <p>
+        一見するとただのBase64っぽい文字列。<br>
+        実際は、本物のBase64を細かく分割し、その途中にBase64文字のノイズを混ぜています。
+      </p>
+    </header>
+
+    <section class="panel">
+      <div class="field">
+        <label for="message">隠したい文字列</label>
+        <textarea id="message">Hello, World!</textarea>
+      </div>
+
+      <div class="grid">
+        <div class="field">
+          <label for="payloadPattern">本体を取る文字数パターン</label>
+          <input id="payloadPattern" value="4,3,5,2" />
+          <div class="tiny">例: 4,3,5,2</div>
+        </div>
+
+        <div class="field">
+          <label for="noisePattern">その後に挟むノイズ文字数パターン</label>
+          <input id="noisePattern" value="2,1,3,2" />
+          <div class="tiny">例: 2,1,3,2</div>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="generate">生成</button>
+        <button id="randomRule" class="secondary">ルールをランダム化</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <label>生成結果</label>
+      <div id="output" class="output"></div>
+
+      <div class="buttons">
+        <button id="copy">コピー</button>
+        <button id="restore" class="secondary">復元してみる</button>
+      </div>
+
+      <div id="status" class="status"></div>
+
+      <div class="meta">
+        <div>復元ルール:</div>
+        <div id="ruleView" class="rule"></div>
+      </div>
+
+      <div id="revealBox" class="reveal" hidden>
+        <strong>復元されたBase64</strong>
+        <code id="restoredBase64"></code>
+
+        <strong>デコード結果</strong>
+        <code id="decoded"></code>
+      </div>
+    </section>
+
+    <section class="panel">
+      <strong>仕組み</strong>
+      <p class="tiny">
+        Base64文字列を payloadPattern の文字数だけ取り、その直後に noisePattern の文字数だけランダムなBase64文字を追加します。
+        パターンは最後まで繰り返されます。
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const B64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+    const output = document.getElementById("output");
+    const status = document.getElementById("status");
+    const revealBox = document.getElementById("revealBox");
+    const restoredBase64 = document.getElementById("restoredBase64");
+    const decoded = document.getElementById("decoded");
+    const ruleView = document.getElementById("ruleView");
+
+    function randomInt(max) {
+      if (max <= 0) return 0;
+
+      const maxUint32 = 0xFFFFFFFF;
+      const limit = maxUint32 - (maxUint32 % max);
+      const buffer = new Uint32Array(1);
+
+      do {
+        crypto.getRandomValues(buffer);
+      } while (buffer[0] >= limit);
+
+      return buffer[0] % max;
+    }
+
+    function randomBase64Chars(length) {
+      let out = "";
+
+      for (let i = 0; i < length; i++) {
+        out += B64[randomInt(B64.length)];
+      }
+
+      return out;
+    }
+
+    function parsePattern(value, fallback) {
+      const parts = value
+        .split(",")
+        .map(v => Number(v.trim()))
+        .filter(v => Number.isInteger(v) && v >= 0);
+
+      return parts.length ? parts : fallback;
+    }
+
+    function encodeUtf8Base64(text) {
+      const bytes = new TextEncoder().encode(text);
+      let binary = "";
+
+      for (const byte of bytes) {
+        binary += String.fromCharCode(byte);
+      }
+
+      return btoa(binary);
+    }
+
+    function decodeUtf8Base64(base64) {
+      const binary = atob(base64);
+      const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+      return new TextDecoder().decode(bytes);
+    }
+
+    function mixNoise(base64, payloadPattern, noisePattern) {
+      let pos = 0;
+      let step = 0;
+      let mixed = "";
+
+      while (pos < base64.length) {
+        let payloadLen = payloadPattern[step % payloadPattern.length];
+
+        if (payloadLen <= 0) {
+          payloadLen = 1;
+        }
+
+        const chunk = base64.slice(pos, pos + payloadLen);
+        pos += chunk.length;
+
+        const noiseLen = noisePattern[step % noisePattern.length];
+
+        mixed += chunk;
+
+        if (pos < base64.length && noiseLen > 0) {
+          mixed += randomBase64Chars(noiseLen);
+        }
+
+        step++;
+      }
+
+      return mixed;
+    }
+
+    function restoreNoise(mixed, originalBase64Length, payloadPattern, noisePattern) {
+      let mixedPos = 0;
+      let restored = "";
+      let step = 0;
+
+      while (restored.length < originalBase64Length && mixedPos < mixed.length) {
+        let payloadLen = payloadPattern[step % payloadPattern.length];
+
+        if (payloadLen <= 0) {
+          payloadLen = 1;
+        }
+
+        const remaining = originalBase64Length - restored.length;
+        const actualPayloadLen = Math.min(payloadLen, remaining);
+
+        restored += mixed.slice(mixedPos, mixedPos + actualPayloadLen);
+        mixedPos += actualPayloadLen;
+
+        if (restored.length >= originalBase64Length) {
+          break;
+        }
+
+        const noiseLen = noisePattern[step % noisePattern.length];
+        mixedPos += noiseLen;
+
+        step++;
+      }
+
+      return restored;
+    }
+
+    function generate() {
+      const message = document.getElementById("message").value;
+
+      const payloadPattern = parsePattern(
+        document.getElementById("payloadPattern").value,
+        [4, 3, 5, 2]
+      );
+
+      const noisePattern = parsePattern(
+        document.getElementById("noisePattern").value,
+        [2, 1, 3, 2]
+      );
+
+      const base64 = encodeUtf8Base64(message);
+      const mixed = mixNoise(base64, payloadPattern, noisePattern);
+
+      output.textContent = mixed;
+
+      output.dataset.originalLength = String(base64.length);
+      output.dataset.payloadPattern = JSON.stringify(payloadPattern);
+      output.dataset.noisePattern = JSON.stringify(noisePattern);
+
+      ruleView.textContent =
+        `payload = [${payloadPattern.join(", ")}]\n` +
+        `noise   = [${noisePattern.join(", ")}]\n` +
+        `original base64 length = ${base64.length}`;
+
+      revealBox.hidden = true;
+
+      status.textContent =
+        `${base64.length}文字のBase64 → ${mixed.length}文字のBase64風文字列`;
+    }
+
+    function restore() {
+      const mixed = output.textContent;
+      const originalLength = Number(output.dataset.originalLength);
+      const payloadPattern = JSON.parse(output.dataset.payloadPattern || "[]");
+      const noisePattern = JSON.parse(output.dataset.noisePattern || "[]");
+
+      if (!mixed || !originalLength || !payloadPattern.length || !noisePattern.length) {
+        return;
+      }
+
+      const restored = restoreNoise(
+        mixed,
+        originalLength,
+        payloadPattern,
+        noisePattern
+      );
+
+      restoredBase64.textContent = restored;
+
+      try {
+        decoded.textContent = decodeUtf8Base64(restored);
+      } catch {
+        decoded.textContent = "Decode failed";
+      }
+
+      revealBox.hidden = false;
+    }
+
+    document.getElementById("generate").addEventListener("click", generate);
+
+    document.getElementById("restore").addEventListener("click", restore);
+
+    document.getElementById("copy").addEventListener("click", async () => {
+      await navigator.clipboard.writeText(output.textContent);
+      status.textContent = "コピーしました";
+    });
+
+    document.getElementById("randomRule").addEventListener("click", () => {
+      const len = 3 + randomInt(4);
+
+      const payload = Array.from(
+        { length: len },
+        () => 2 + randomInt(5)
+      );
+
+      const noise = Array.from(
+        { length: len },
+        () => 1 + randomInt(4)
+      );
+
+      document.getElementById("payloadPattern").value =
+        payload.join(",");
+
+      document.getElementById("noisePattern").value =
+        noise.join(",");
+
+      generate();
+    });
+
+    generate();
+  </script>
+</body>
+</html>

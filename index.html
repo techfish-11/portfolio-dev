@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>さかなのサイト</title>
+  <meta
+    name="description"
+    content="さかなの個人サイトです。ホームサーバー、ネットワーク、Web開発など、取り組んでいることを紹介しています。"
+  >
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Sakana">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#181a1b" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+
+  <link rel="canonical" href="https://techfish.dev/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:site_name" content="さかなのサイト">
+  <meta property="og:title" content="さかなのサイト">
+  <meta property="og:description" content="ホームサーバー、ネットワーク、Web開発など、取り組んでいることを紹介しています。">
+  <meta property="og:url" content="https://techfish.dev/">
+  <meta property="profile:username" content="techfish-11">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="さかなのサイト">
+  <meta name="twitter:description" content="ホームサーバー、ネットワーク、Web開発など、取り組んでいることを紹介しています。">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://techfish.dev/#website",
+        "url": "https://techfish.dev/",
+        "name": "さかなのサイト",
+        "description": "ホームサーバー、ネットワーク、Web開発などについて紹介する個人サイト",
+        "inLanguage": "ja-JP",
+        "publisher": { "@id": "https://techfish.dev/#person" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://techfish.dev/#profile",
+        "url": "https://techfish.dev/",
+        "name": "さかなのプロフィール",
+        "isPartOf": { "@id": "https://techfish.dev/#website" },
+        "mainEntity": { "@id": "https://techfish.dev/#person" },
+        "inLanguage": "ja-JP"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://techfish.dev/#person",
+        "name": "Sakana",
+        "url": "https://techfish.dev/",
+        "knowsAbout": ["Linux", "サーバー構築", "ネットワーク", "情報セキュリティ", "Web開発", "Discord Bot"],
+        "sameAs": [
+          "https://github.com/techfish-11",
+          "https://twitter.com/11sakana1"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #ffffff;
+      --text: #222222;
+      --muted: #666666;
+      --link: #0066cc;
+      --border: #dddddd;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #181a1b;
+        --text: #e8e6e3;
+        --muted: #aaa6a0;
+        --link: #6ab0f3;
+        --border: #444444;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem;
+      color: var(--text);
+      background: var(--background);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans JP", sans-serif;
+      line-height: 1.8;
+    }
+
+    header {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      padding: 1.5rem 0;
+    }
+
+    section + section {
+      margin-top: 2.5rem;
+    }
+
+    h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.35rem;
+    }
+
+    p {
+      margin: 0.75rem 0;
+    }
+
+    a {
+      color: var(--link);
+    }
+
+    a:focus-visible {
+      outline: 3px solid var(--link);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 0;
+      left: -9999px;
+      padding: 0.75rem 1rem;
+      color: var(--background);
+      background: var(--text);
+      z-index: 1;
+    }
+
+    .skip-link:focus {
+      left: 0;
+    }
+
+    .plain-list {
+      padding-left: 1.4rem;
+    }
+
+    .plain-list li + li {
+      margin-top: 0.35rem;
+    }
+
+    .friend-links {
+      margin-top: 1rem;
+    }
+
+    .friend-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .friend-link:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .friend-link__banner {
+      flex: 0 0 320px;
+      display: inline-block;
+      font-weight: 700;
+    }
+
+    .friend-link__banner img {
+      display: block;
+      width: 320px;
+      max-width: 100%;
+      height: 100px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .friend-link__body {
+      min-width: 0;
+    }
+
+    .friend-link__body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 600px) {
+      .friend-link {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .friend-link__banner {
+        flex-basis: auto;
+      }
+    }
+
+    footer {
+      padding-top: 1rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header>
+    <h1>さかなのサイト</h1>
+
+    <nav aria-label="メインナビゲーション">
+      <a href="#about">プロフィール</a>
+      <a href="#projects">プロジェクト</a>
+      <a href="#skills">スキル</a>
+      <a href="#achievements">実績</a>
+      <a href="#contact">連絡先</a>
+      <a href="#links">相互リンク</a>
+      <a href="https://techfish.dev/dn42/" target="_blank" rel="noopener noreferrer">AS4242423510</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section id="about">
+      <h2>プロフィール</h2>
+
+      <p>
+        ホームサーバーを中心に、ネットワーク、セキュリティ、Web開発に取り組んでいる高校生です。
+        単に構築して終わるのではなく、長期間にわたって安定して使い続けられる仕組みづくりを重視しています。
+      </p>
+
+      <p>
+        主にRHEL系のLinuxディストリビューションを使用し、サーバーやネットワークの構築を経験しています。
+      </p>
+    </section>
+
+    <section id="projects">
+      <h2>プロジェクト</h2>
+
+      <article id="sorahost">
+      <h3>SORAHOST</h3>
+
+      <p>
+        現在、SORAHOSTというWebホスティングサービスの立ち上げに携わり、
+        内部ネットワークと監視基盤の構築を担当しています。
+        <a href="https://sorahost.net" target="_blank" rel="noopener noreferrer">SORAHOST公式サイト</a>
+      </p>
+      </article>
+
+      <article id="swiftly">
+      <h3>Swiftly読み上げbot</h3>
+
+      <p>
+        Discord向けの読み上げbot「Swiftly」の設計・運用を行っています。
+        多くのDiscordサーバーで利用されており、日々改善を続けています。
+        <a href="https://swiftlybot.com" target="_blank" rel="noopener noreferrer">Swiftly公式サイト</a>
+      </p>
+      </article>
+    </section>
+
+    <section id="life">
+      <h2>人生の歩み</h2>
+
+      <ol class="plain-list">
+        <li>2010年10月、愛知県に生まれる</li>
+        <li>小学4年生で、親が急に買ってきたPCでコンピューターに興味を持つ</li>
+        <li>中学1年生の頃、無料マイクラレンタルサーバーに不満を持ち、ノートPCでマイクラサーバー運営を始める</li>
+        <li>ラックサーバーを使用し、友人にサーバーを貸すようになる</li>
+        <li>中学3年生の頃、Swiftly読み上げbotの開発を始める</li>
+        <li>2026年、N高等学校に入学</li>
+        <li>2026年6月、合同会社SORAHOSTの立ち上げに携わる</li>
+        <li>2026年8月、N高のイベントで株式会社ドワンゴ本社に行き、自宅サーバーのネットワークについてLTを行う</li>
+      </ol>
+    </section>
+
+    <section id="skills">
+      <h2>スキル</h2>
+
+      <ul class="plain-list">
+        <li>Linuxサーバー構築・運用（AlmaLinux、Ubuntu Server、Proxmox VE、Docker、Windows Server、PostgreSQL、MySQL）</li>
+        <li>ネットワーク構築・運用（VyOS、OPNsense、WireGuard、Tailscale、CrowdSec、DHCP、DNS、Unbound、BGP）</li>
+        <li>自動化・監視・運用（Jenkins、Zabbix、Grafana、Prometheus、Ansible、Gitea、Pterodactyl Panel、Active Directory）</li>
+      </ul>
+    </section>
+
+    <section id="achievements">
+      <h2>実績</h2>
+
+      <ul class="plain-list">
+        <li>中規模Minecraftサーバーの提供・運営</li>
+        <li>3,000人規模のDiscordコミュニティでのモデレーション</li>
+        <li>学校向けソフトウェアの開発・導入</li>
+        <li>ポートフォリオサイトの自動デプロイ環境構築</li>
+        <li>大規模Discord読み上げbot「Swiftly」の設計・運用</li>
+        <li>Honoへの貢献とCVE取得</li>
+        <li>SORAHOSTレンタルサーバー事業の立ち上げと運用</li>
+      </ul>
+    </section>
+
+
+    <section id="contact">
+      <h2>Contact</h2>
+
+      <p>
+        Twitter: <a href="https://twitter.com/11sakana1" target="_blank" rel="noopener noreferrer">@11sakana1</a>
+        <br>
+        Discord: kurage.1（フレンド申請の際は、要件を添えてください）
+        <br>
+        Email: <a href="mailto:me@techfish.dev">me@techfish.dev</a>
+        <br>
+        GitHub: <a href="https://github.com/techfish-11" target="_blank" rel="noopener noreferrer">https://github.com/techfish-11</a>
+      </p>
+    </section>
+
+    <section id="links">
+      <h2>相互リンク</h2>
+
+      <div class="friend-links">
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://edamamex.dev/" target="_blank" rel="noopener noreferrer"><img src="https://cdn.edamamex.dev/banner.png?external" alt="EdamAmexのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://edamamex.dev/" target="_blank" rel="noopener noreferrer">EdamAmex</a><p>Honoのトップコントリビューター</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://info.takos.jp/" target="_blank" rel="noopener noreferrer"><img src="https://info.takos.jp/banner.png" alt="たこのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://info.takos.jp/" target="_blank" rel="noopener noreferrer">たこ</a><p>たこです。SNS作ってる人です。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://371tti.net/" target="_blank" rel="noopener noreferrer"><img src="https://371tti.net/banner.png" alt="371ttiのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://371tti.net/" target="_blank" rel="noopener noreferrer">371tti</a><p>Rust信者の方。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://taisan11.dev/" target="_blank" rel="noopener noreferrer">taisan</a>
+          <div class="friend-link__body"><p>taisanのサイト。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://prmgg.github.io/" target="_blank" rel="noopener noreferrer">ちbき</a>
+          <div class="friend-link__body"><p>ちbきのサイト。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://imme.kotoca.net/" target="_blank" rel="noopener noreferrer"><img src="https://imme.kotoca.net/banner.png" alt="immeのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://imme.kotoca.net/" target="_blank" rel="noopener noreferrer">imme</a><p>immeのサイト。色々なものを自作する方です。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://akku1139.github.io/" target="_blank" rel="noopener noreferrer"><img src="https://akku1139.github.io/banners/320x100.png" alt="akkuのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://akku1139.github.io/" target="_blank" rel="noopener noreferrer">akku</a><p>akkuのサイト。Honoのドキュメントの日本語翻訳をしてる人です。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://activetk.jp/" target="_blank" rel="noopener noreferrer"><img src="https://www.activetk.jp/icon/index_150_150.ico" alt="ActiveTKのアイコン" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://activetk.jp/" target="_blank" rel="noopener noreferrer">ActiveTK</a><p>ActiveTKのサイト。とにかくすごい方。天才だと思う。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://serken.tech/" target="_blank" rel="noopener noreferrer">Kentaro Yamamoto</a>
+          <div class="friend-link__body"><p>Kentaro Yamamotoさんのポートフォリオサイト。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://ryusei.space/" target="_blank" rel="noopener noreferrer">Ryusei</a>
+          <div class="friend-link__body"><p>マイクラサーバーをやっている方。最近サーバーも買ったみたい。</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://m4gu.dev/" target="_blank" rel="noopener noreferrer"><img src="https://m4gu.dev/magu.png" alt="まぐのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://m4gu.dev/" target="_blank" rel="noopener noreferrer">まぐ</a><p>ハイパーつよつよ開発者</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://drsb.f5.si/" target="_blank" rel="noopener noreferrer"><img src="https://drsb.f5.si/img/banner.png" alt="Jüws Pageのバナー" loading="lazy" decoding="async" referrerpolicy="no-referrer"></a>
+          <div class="friend-link__body"><a href="https://drsb.f5.si/" target="_blank" rel="noopener noreferrer">Jüws Page</a><p>Scratch系の方</p></div>
+        </article>
+        <article class="friend-link">
+          <a class="friend-link__banner" href="https://nennneko5787.net/" target="_blank" rel="noopener noreferrer">ねんねこ</a>
+          <div class="friend-link__body"><p>すごい技術者</p></div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <small>このWebサイトは<a href="https://sorahost.net" target="_blank" rel="noopener noreferrer">SORAHOST Workersプラン</a>でホスティングされています。</small>
+    <br>
+    <br>
+    <small>© 2026 Sakana</small>
+</footer>
+</body>
+</html>
