@@ -66,224 +66,70 @@
   }
   </script>
 
-  <style>
-    :root {
-      color-scheme: light dark;
-      --background: #ffffff;
-      --text: #222222;
-      --muted: #666666;
-      --link: #0066cc;
-      --border: #dddddd;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --background: #181a1b;
-        --text: #e8e6e3;
-        --muted: #aaa6a0;
-        --link: #6ab0f3;
-        --border: #444444;
-      }
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem;
-      color: var(--text);
-      background: var(--background);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Noto Sans JP", sans-serif;
-      line-height: 1.8;
-    }
-
-    header {
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5rem;
-    }
-
-    main {
-      padding: 1.5rem 0;
-    }
-
-    section + section {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    h2 {
-      margin: 0 0 1rem;
-      padding-left: 0.75rem;
-      border-left: 3px solid var(--link);
-      font-size: 1.35rem;
-    }
-
-    p {
-      margin: 0.75rem 0;
-    }
-
-    a {
-      color: var(--link);
-    }
-
-    a:focus-visible {
-      outline: 3px solid var(--link);
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: 0;
-      left: -9999px;
-      padding: 0.75rem 1rem;
-      color: var(--background);
-      background: var(--text);
-      z-index: 1;
-    }
-
-    .skip-link:focus {
-      left: 0;
-    }
-
-    .plain-list {
-      padding-left: 1.4rem;
-    }
-
-    .plain-list li + li {
-      margin-top: 0.35rem;
-    }
-
-    .friend-links {
-      margin-top: 1rem;
-    }
-
-    .friend-link {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .friend-link:first-child {
-      border-top: 1px solid var(--border);
-    }
-
-    .friend-link__banner {
-      flex: 0 0 320px;
-      display: inline-block;
-      font-weight: 700;
-    }
-
-    .friend-link__banner img {
-      display: block;
-      width: 320px;
-      max-width: 100%;
-      height: 100px;
-      object-fit: contain;
-      object-position: left center;
-    }
-
-    .friend-link__body {
-      min-width: 0;
-    }
-
-    .friend-link__body p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    @media (max-width: 600px) {
-      .friend-link {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .friend-link__banner {
-        flex-basis: auto;
-      }
-    }
-
-    footer {
-      padding-top: 1rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 
 <body>
   <a class="skip-link" href="#main-content">本文へ移動</a>
-  <header>
-    <h1>さかなのサイト</h1>
-
-    <nav aria-label="メインナビゲーション">
-      <a href="#about">プロフィール</a>
+  <header class="site-header">
+    <a class="site-brand" href="/" aria-label="さかなのサイト ホーム">
+      <img src="/favicon.ico" alt="" width="28" height="28" decoding="async">
+      <span>さかなのサイト</span>
+    </a>
+    <nav class="site-nav" aria-label="メインナビゲーション">
       <a href="#projects">プロジェクト</a>
-      <a href="#skills">スキル</a>
-      <a href="#achievements">実績</a>
+      <a href="#services">サービス</a>
+      <a href="/dn42/">DN42</a>
       <a href="#contact">連絡先</a>
-      <a href="#links">相互リンク</a>
-      <a href="https://techfish.dev/dn42/" target="_blank" rel="noopener noreferrer">AS4242423510</a>
     </nav>
   </header>
 
-  <main id="main-content">
-    <section id="about">
-      <h2>プロフィール</h2>
+  <main id="main-content" tabindex="-1">
+    <section id="about" class="hero">
+      <h1>さかなのサイト</h1>
 
       <p>
-        ホームサーバーを中心に、ネットワーク、セキュリティ、Web開発に取り組んでいる高校生です。
-        単に構築して終わるのではなく、長期間にわたって安定して使い続けられる仕組みづくりを重視しています。
+        自宅サーバーとクラウドを駆使してネットワークの勉強をしている高校生です。<br />
+        また、Discord向けの読み上げbot「Swiftly」の設計・運用も行っています。
       </p>
 
       <p>
         主にRHEL系のLinuxディストリビューションを使用し、サーバーやネットワークの構築を経験しています。
       </p>
+      <div class="hero-actions">
+        <a class="button" href="#projects">プロジェクトを見る</a>
+        <a class="button button--secondary" href="#contact">連絡先を見る</a>
+      </div>
+      <nav class="quick-links" aria-label="目的別の案内">
+        <a href="#achievements"><strong>活動を知る <span aria-hidden="true">↗</span></strong><span>実績・スキル・これまでの歩み</span></a>
+        <a href="#services"><strong>サービスを使う <span aria-hidden="true">↗</span></strong><span>NTPサーバー・ブラウザツール</span></a>
+        <a href="/dn42/"><strong>ネットワークをつなぐ <span aria-hidden="true">↗</span></strong><span>DN42の情報・ピアリング案内</span></a>
+      </nav>
     </section>
 
-    <section id="network">
-      <h2>このサイトについて</h2>
-      <p>
-        このWebサイトは私の自己紹介や活動内容を紹介するために作成されました。サーバーは自宅に設置されています。
-        ルーターは東京に設置されており、トンネルを通して自宅サーバーと接続されています。東京ルーターにはOSにAlmaLinux、自宅側ルーターにはVyOSを採用し、WebサーバーにはNginxを使用しています。
-      </p>
-      <p>
-        このWebサイトはIPv4 /29アドレスを<a href="https://www.sdconw.com/" target="_blank" rel="noopener noreferrer">島根データセンター友の会</a>様から、IPv6 /48アドレスを<a href="https://neody.ad.jp/" target="_blank" rel="noopener noreferrer">Neodyland</a>様から提供していただき、運用しています。
-      </p>
+    <section id="news" aria-labelledby="news-heading">
+      <h2 id="news-heading">お知らせ</h2>
 
-      <code class="note">$ mtr -4 techfish.dev</code>
-      <br />
-      <code class="note">$ mtr -6 techfish.dev</code>
-      <p class="note">すると商用ISPとは違った経路で面白いかもしれません。</p>
+      <details class="notice">
+        <summary>2026年12月12日｜ネットワーク計画メンテナンス</summary>
+        <div class="notice__body">
+          <p>2026年12月12日8時から20時に、上流ネットワークのメンテナンスが行われるため、ポートフォリオとNTPサーバーが一時的に利用不可能になります。</p>
+        </div>
+      </details>
+      <details class="notice">
+        <summary>2026年12月21日｜ネットワーク計画メンテナンス</summary>
+        <div class="notice__body">
+          <p>2026年12月21日8時から20時に、上流ネットワークのメンテナンスが行われるため、ポートフォリオとNTPサーバーが一時的に利用不可能になります。</p>
+        </div>
+      </details>
+
     </section>
 
     <section id="projects">
       <h2>プロジェクト</h2>
-      <article id="swiftly">
+      <p class="section-intro">開発からインフラ構築、日々の運用まで取り組んでいるプロジェクトです。</p>
+      <div class="project-grid">
+      <article id="swiftly" class="card">
       <h3>Swiftly読み上げbot</h3>
 
       <p>
@@ -293,7 +139,7 @@
       </p>
       </article>
 
-      <article id="sakana-net">
+      <article id="sakana-net" class="card">
       <h3>さかなネット</h3>
 
       <p>
@@ -302,30 +148,12 @@
       </p>
       </article>
 
-    </section>
-
-    <section id="life">
-      <h2>人生の歩み</h2>
-
-      <ol class="plain-list">
-        <li>2010年10月、愛知県に生まれる</li>
-        <li>小学4年生で、親が急に買ってきたPCでコンピューターに興味を持つ</li>
-        <li>中学1年生の頃、無料マイクラレンタルサーバーに不満を持ち、ノートPCでマイクラサーバー運営を始める</li>
-        <li>ラックサーバーを使用し、友人にサーバーを貸すようになる</li>
-        <li>中学3年生の頃、Swiftly読み上げbotの開発を始める</li>
-        <li>2026年、N高等学校に入学</li>
-        <li>2026年8月、N高のイベントで株式会社ドワンゴ本社に行き、自宅サーバーのネットワークについてLTを行う</li>
-      </ol>
-    </section>
-
-    <section id="skills">
-      <h2>スキル</h2>
-
-      <ul class="plain-list">
-        <li>Linuxサーバー構築・運用（AlmaLinux、Ubuntu Server、Proxmox VE、Docker、Windows Server、PostgreSQL、MySQL）</li>
-        <li>ネットワーク構築・運用（VyOS、OPNsense、WireGuard、Tailscale、CrowdSec、DHCP、DNS、Unbound、BGP）</li>
-        <li>自動化・監視・運用（Jenkins、Zabbix、Grafana、Prometheus、Ansible、Gitea、Pterodactyl Panel、Active Directory）</li>
-      </ul>
+      <article class="card">
+        <h3>DN42 / AS4242423510</h3>
+        <p>BGPとWireGuardを利用したネットワークを運用し、ルーティングや相互接続を検証しています。</p>
+        <a href="/dn42/">ネットワーク情報・ピアリング案内</a>
+      </article>
+      </div>
     </section>
 
     <section id="achievements">
@@ -342,6 +170,16 @@
       </ul>
     </section>
 
+    <section id="skills">
+      <h2>スキル</h2>
+
+      <ul class="plain-list">
+        <li>Linuxサーバー構築・運用（AlmaLinux、Ubuntu Server、Proxmox VE、Docker、Windows Server、PostgreSQL、MySQL）</li>
+        <li>ネットワーク構築・運用（VyOS、OPNsense、WireGuard、Tailscale、CrowdSec、DHCP、DNS、Unbound、BGP）</li>
+        <li>自動化・監視・運用（Jenkins、Zabbix、Grafana、Prometheus、Ansible、Gitea、Pterodactyl Panel、Active Directory）</li>
+      </ul>
+    </section>
+
     <section id="join-projects">
       <h2>参加プロジェクト</h2>
       <p>現在、以下のプロジェクトに参加しています。</p>
@@ -354,10 +192,26 @@
       </ul>
     </section>
 
-    <section id="services">
-      <h2>サービス一覧</h2>
+    <section id="life">
+      <h2>これまでの歩み</h2>
 
-      <article id="ntp-server">
+      <ol class="plain-list">
+        <li>2010年10月、愛知県に生まれる</li>
+        <li>小学4年生で、親が急に買ってきたPCでコンピューターに興味を持つ</li>
+        <li>中学1年生の頃、無料マイクラレンタルサーバーに不満を持ち、ノートPCでマイクラサーバー運営を始める</li>
+        <li>ラックサーバーを使用し、友人にサーバーを貸すようになる</li>
+        <li>中学3年生の頃、Swiftly読み上げbotの開発を始める</li>
+        <li>2026年、N高等学校に入学</li>
+        <li>2026年8月、N高のイベントで株式会社ドワンゴ本社に行き、自宅サーバーのネットワークについてLTを行う</li>
+      </ol>
+    </section>
+
+    <section id="services">
+      <h2>サービス・ツール</h2>
+      <p class="section-intro">公開しているサービスと、ブラウザで使えるツールです。</p>
+      <div class="project-grid">
+
+      <article id="ntp-server" class="card">
       <h3>NTPサーバー</h3>
 
       <p>
@@ -367,10 +221,43 @@
       </p>
       </article>
 
+      <article class="card">
+        <h3>Base64 Noise Mixer</h3>
+        <p>Base64文字列にノイズを混ぜ、生成と復元の仕組みを試せるブラウザツールです。</p>
+        <a href="/base64.html">ツールを開く</a>
+      </article>
+      </div>
+    </section>
+
+    <section id="network">
+      <h2>このサイトを支えるネットワーク</h2>
+      <p>
+        このWebサイトは私の自己紹介や活動内容を紹介するために作成されました。サーバーは自宅に設置されています。
+        ルーターは東京に設置されており、トンネルを通して自宅サーバーと接続されています。東京ルーターにはOSにAlmaLinux、自宅側ルーターにはVyOSを採用し、WebサーバーにはNginxを使用しています。
+      </p>
+      <p>
+        このWebサイトはIPv4 /29アドレスを<a href="https://www.sdconw.com/" target="_blank" rel="noopener noreferrer">島根データセンター友の会</a>様から、IPv6 /48アドレスを<a href="https://neody.ad.jp/" target="_blank" rel="noopener noreferrer">Neodyland</a>様から提供していただき、運用しています。
+        両団体には感謝申し上げます。
+      </p>
+
+      <code class="note">$ mtr -4 techfish.dev</code>
+      <br />
+      <code class="note">$ mtr -6 techfish.dev</code>
+      <p class="note">すると商用ISPとは違った通信経路で面白いかもしれません。</p>
+
+      <br />
+
+      <figure>
+        <a href="/images/network-diagram.png" target="_blank" rel="noopener noreferrer">
+          <img src="/images/network-diagram.png" alt="ネットワーク構成図" loading="lazy" decoding="async">
+        </a>
+        <figcaption>ネットワーク構成図（クリックで拡大）</figcaption>
+      </figure>
     </section>
 
     <section id="contact">
-      <h2>Contact</h2>
+      <h2>連絡先</h2>
+      <p class="section-intro">活動についてのお問い合わせはメールへ。DN42のピアリングは<a href="/dn42/#peering">接続案内</a>をご確認ください。</p>
 
       <p>
         Twitter: <a href="https://twitter.com/11sakana1" target="_blank" rel="noopener noreferrer">@11sakana1</a>
@@ -441,13 +328,12 @@
         </article>
       </div>
     </section>
-
   </main>
 
   <footer>
     <small>© 2026 Sakana</small>
-</footer>
-</body>
+    <nav aria-label="フッターナビゲーション"><a href="/">ホーム</a><a href="/dn42/">DN42</a><a href="/base64.html">Base64ツール</a><a href="/#links">相互リンク</a><a href="#main-content">ページ先頭へ</a></nav>
+  </footer>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VX4RYVRDR"></script>
 <script>
@@ -457,4 +343,5 @@
 
   gtag('config', 'G-7VX4RYVRDR');
 </script>
+</body>
 </html>

@@ -28,147 +28,7 @@
   <meta name="twitter:title" content="AS4242423510 | さかなのサイト">
   <meta name="twitter:description" content="AS-TECHFISH-DN42のネットワーク情報とピアリング案内です。">
 
-  <style>
-    :root {
-      color-scheme: light dark;
-      --background: #ffffff;
-      --text: #222222;
-      --muted: #666666;
-      --link: #0066cc;
-      --border: #dddddd;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --background: #181a1b;
-        --text: #e8e6e3;
-        --muted: #aaa6a0;
-        --link: #6ab0f3;
-        --border: #444444;
-      }
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem;
-      color: var(--text);
-      background: var(--background);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        "Noto Sans JP", sans-serif;
-      line-height: 1.8;
-    }
-
-    header {
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5rem;
-    }
-
-    main {
-      padding: 1.5rem 0;
-    }
-
-    section + section {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-
-    h2 {
-      margin: 0 0 1rem;
-      padding-left: 0.75rem;
-      border-left: 3px solid var(--link);
-      font-size: 1.35rem;
-    }
-
-    p {
-      margin: 0.75rem 0;
-    }
-
-    a {
-      color: var(--link);
-    }
-
-    a:focus-visible {
-      outline: 3px solid var(--link);
-      outline-offset: 3px;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: 0;
-      left: -9999px;
-      padding: 0.75rem 1rem;
-      color: var(--background);
-      background: var(--text);
-      z-index: 1;
-    }
-
-    .skip-link:focus {
-      left: 0;
-    }
-
-    .network-details {
-      margin: 1rem 0 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .network-details div {
-      display: grid;
-      grid-template-columns: minmax(9rem, 1fr) 2fr;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .network-details dt {
-      font-weight: 700;
-    }
-
-    .network-details dd {
-      min-width: 0;
-      margin: 0;
-      overflow-wrap: anywhere;
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    footer {
-      padding-top: 1rem;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
-    @media (max-width: 600px) {
-      .network-details div {
-        grid-template-columns: 1fr;
-        gap: 0.15rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 
 <body>
@@ -182,10 +42,11 @@
       <a href="#network">ネットワーク情報</a>
       <a href="#routers">ルーター</a>
       <a href="#peering">ピアリング</a>
+      <a href="#resources">関連リンク</a>
     </nav>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
     <section id="about">
       <h2>概要</h2>
 
@@ -283,19 +144,7 @@
     </section>
 
 
-    <section id="peering">
-      <h2>ピアリング</h2>
 
-      <p>
-        DN42内でのピアリングを募集しています。IPv4・IPv6の両方に対応しており、
-        WireGuardトンネル上でマルチプロトコルBGPセッションを構成できます。
-      </p>
-
-      <p>
-        ピアリングをご希望の方は、希望する接続方式や接続地点などを添えて
-        <a href="mailto:me@techfish.dev">me@techfish.dev</a> までご連絡ください。
-      </p>
-    </section>
 
     <section id="resources">
       <h2>関連リンク</h2>
@@ -309,8 +158,8 @@
 
   <footer>
     <small>© 2026 Sakana</small>
+    <nav aria-label="フッターナビゲーション"><a href="/">ホーム</a><a href="/dn42/">DN42</a><a href="/base64.html">Base64ツール</a><a href="/#links">相互リンク</a><a href="#main-content">ページ先頭へ</a></nav>
   </footer>
-</body>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VX4RYVRDR"></script>
 <script>
@@ -320,4 +169,5 @@
 
   gtag('config', 'G-7VX4RYVRDR');
 </script>
+</body>
 </html>
