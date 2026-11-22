@@ -257,27 +257,16 @@
     <section id="network">
       <h2>このサイトを支えるネットワーク</h2>
       <p>
-        このWebサイトは私の自己紹介や活動内容を紹介するために作成されました。サーバーは自宅に設置されています。
-        ルーターは東京に設置されており、トンネルを通して自宅サーバーと接続されています。東京ルーターにはOSにAlmaLinux、自宅側ルーターにはVyOSを採用し、WebサーバーにはNginxを使用しています。
+        このWebサイトは私の自己紹介や活動内容を紹介するために作成しました。サーバーは自宅に設置しています。
+        各コアルーターは東京に設置されており、ルートリフレクタが冗長化されています。IPv4の通信にはCGNATが使用されており、IPv6の通信はグローバルIPアドレスで行われています。コアルーターから自宅ルーターまでIPアドレスを引き込む構成です。
+        コアルーターではメトリクスを収集し、Grafanaで可視化しています。今後、さらなる安定化のために様々な取り組みを行っていく予定です。詳細なネットワーク構成は公開できませんが、iBGP over OSPFv3 over WGで構成されています。
       </p>
       <p>
         このWebサイトはIPv4 /29アドレスを<a href="https://www.sdconw.com/" target="_blank" rel="noopener noreferrer">島根データセンター友の会</a>様から、IPv6 /48アドレスを<a href="https://neody.ad.jp/" target="_blank" rel="noopener noreferrer">Neodyland</a>様から提供していただき、運用しています。
         両団体には感謝申し上げます。
       </p>
 
-      <code class="note">$ mtr -4 techfish.dev</code>
       <br />
-      <code class="note">$ mtr -6 techfish.dev</code>
-      <p class="note">すると商用ISPとは違った通信経路で面白いかもしれません。</p>
-
-      <br />
-
-      <figure>
-        <a href="/images/network-diagram.png" target="_blank" rel="noopener noreferrer">
-          <img src="/images/network-diagram.png" alt="ネットワーク構成図" loading="lazy" decoding="async">
-        </a>
-        <figcaption>ネットワーク構成図（クリックで拡大）</figcaption>
-      </figure>
     </section>
 
     <section id="contact">
