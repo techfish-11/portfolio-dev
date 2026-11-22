@@ -125,6 +125,9 @@ figure img { display: block; width: 100%; max-width: 760px; height: auto; border
 figcaption { margin-top: .5rem; color: var(--muted); font-size: .85rem; }
 code { font-family: ui-monospace, Consolas, monospace; font-size: .9em; }
 .network-details { margin: 1rem 0 0; border-top: 1px solid var(--border); }
+.network-diagram { margin: 1.5rem 0; }
+.network-diagram a { display: block; border: 1px solid var(--border); border-radius: .5rem; background: #fff; overflow: hidden; }
+.network-diagram img { max-width: none; border-radius: 0; }
 .network-details div { display: grid; grid-template-columns: minmax(9rem, 1fr) 2fr; gap: 1rem; padding: .75rem 0; border-bottom: 1px solid var(--border); }
 .network-details dt { font-weight: 700; }
 .network-details dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }

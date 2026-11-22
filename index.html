@@ -256,17 +256,33 @@
 
     <section id="network">
       <h2>このサイトを支えるネットワーク</h2>
-      <p>
-        このWebサイトは私の自己紹介や活動内容を紹介するために作成しました。サーバーは自宅に設置しています。<br /><br />
-        各コアルーターは東京に設置されており、ルートリフレクタが冗長化されています。IPv4の通信にはCGNATが使用されており、IPv6の通信はグローバルIPアドレスで行われています。コアルーターから自宅ルーターまでIPアドレスを引き込む構成です。<br /><br />
-        コアルーターではメトリクスを収集し、Grafanaで可視化しています。今後、さらなる安定化のために様々な取り組みを行っていく予定です。詳細なネットワーク構成は公開できませんが、iBGP over OSPFv3 over WireGuardで構成されています。<br />
-      </p>
-      <p>
-        このWebサイトはIPv4 /29アドレスを<a href="https://www.sdconw.com/" target="_blank" rel="noopener noreferrer">島根データセンター友の会</a>様から、IPv6 /48アドレスを<a href="https://neody.ad.jp/" target="_blank" rel="noopener noreferrer">Neodyland</a>様から提供していただき、運用しています。
-        両団体には感謝申し上げます。
-      </p>
+      <p>自宅サーバーから、東京のコアルーターを経由して公開しています。</p>
 
-      <br />
+      <figure class="network-diagram">
+        <a href="/images/network-diagram2.png" target="_blank" rel="noopener noreferrer" aria-label="ネットワーク構成図を原寸で開く（新しいタブ）">
+          <img src="/images/network-diagram2.png" width="1258" height="603" alt="IPv4上流のSDCCとIPv6上流のNeodylandから東京のコアルーター2台へ接続し、名古屋の接続拠点と監視サーバーにつながるネットワーク構成図。内部接続はiBGP over OSPFv3 over WireGuard。" loading="lazy" decoding="async">
+        </a>
+        <figcaption>※2026/11/23時点のネットワーク構成です。</figcaption>
+      </figure>
+
+      <dl class="network-details">
+        <div>
+          <dt>ネットワーク構成</dt>
+          <dd>東京のコアルーターから自宅へIPアドレスを引き込む構成で、ルートリフレクタなどを冗長化しています。iBGP over OSPFv3 over WireGuardで構成し、IPv4通信にはCGNAT、IPv6通信にはグローバルIPアドレスを使用しています。</dd>
+        </div>
+        <div>
+          <dt>監視</dt>
+          <dd>コアルーターのメトリクスを収集し、Grafanaで可視化しています。</dd>
+        </div>
+        <div>
+          <dt>アドレス提供</dt>
+          <dd>IPv4 /29 ×2：<a href="https://www.sdconw.com/" target="_blank" rel="noopener noreferrer">島根データセンター友の会</a><br />
+            IPv6 /48：<a href="https://neody.ad.jp/" target="_blank" rel="noopener noreferrer">Neodyland</a></dd>
+        </div>
+      </dl>
+      <p class="note">アドレスをご提供いただいている両団体に感謝申し上げます。</p>
+
+      <p>まだまだ改善の余地があります。今後も安定性の向上に取り組んでいきます。</p>
     </section>
 
     <section id="contact">
